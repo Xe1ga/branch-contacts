@@ -25,7 +25,7 @@ SECRET_KEY = '(yvop2*!onhsdx$wwd!z4f3fz!0#t+ub+=9tjzwm=glpiqupaz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '92.53.127.29']
 
 
 # Application definition
@@ -123,3 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
