@@ -1,0 +1,296 @@
+.footer {
+    background-color: #fff;
+}
+
+.footer .copyright {
+    text-align: center;
+    padding-right: 50px;
+}
+
+.scalable:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.invisible {
+    display: none;
+}
+
+.form-panel {
+    margin: 0 25% 2%;
+    padding-bottom: 12px;
+    width: auto;
+}
+
+.round-bordered {
+    border: 1px solid #aaa;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.download-link {
+    cursor: pointer;
+}
+
+.form-group {
+    margin: 15px;
+    /* margin-left:; */
+}
+
+.row {
+    margin: 6px;
+}
+
+.in-line {
+    width: 255px;
+    float: left;
+    margin-left: 33px;
+    margin-bottom: 15px;
+}
+
+table thead {
+    text-align: center;
+}
+
+table tbody tr td {
+    text-align: left;
+}
+
+.report-table {
+    font-family: 'Times New Roman';
+    font-size: 13;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.not-assigned-court-documents-report tbody tr td {
+    text-align: left;
+}
+
+.not-assigned-court-documents-report tbody tr td:nth-child(2) {
+    width: 400px;
+}
+
+.not-assigned-court-documents-report tbody tr td:nth-child(4) {
+    width: 150px;
+}
+
+.effectiveness-report-table {
+    font-family: 'Times New Roman';
+    font-size: 13;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.effectiveness-report-table tr th {
+    text-align: center;
+    font-weight: normal;
+}
+
+.effectiveness-report-table tr td {
+    text-align: center;
+}
+.effectiveness-report-table tr td:first-child {
+    width: 30px;
+}
+
+.effectiveness-quality-report-table {
+    font-family: 'Times New Roman';
+    font-size: 13;
+}
+
+.effectiveness-quality-report-table tr th {
+    text-align: center;
+    font-weight: normal;
+}
+
+.effectiveness-quality-report-table tr td {
+    text-align: center;
+}
+.effectiveness-quality-report-table tr td:first-child {
+    width: 30px;
+}
+.gray-col {
+    background: #eeeeee;
+}
+
+.green-col {
+    background: #92D050;
+}
+
+.yellow-col {
+    background: #FF0;
+}
+
+.peach-col {
+    background: #FCC;
+}
+
+.report-mainheader {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.navbar {
+    background-color: #000;
+}
+
+.navbar-brand:hover {
+    color: #fff !important;
+}
+
+.jumbotron {
+    background-color: #fff;
+    text-align: center;
+
+}
+
+.jumbotron-middle {
+    position: relative;
+    top: 75px;
+    margin-bottom: 95px;
+}
+
+#form-submit {
+    margin-left: 15px;
+}
+
+.dropdown .dropdown-toggle a {
+    color: #fff;
+}
+
+.clickable {
+    transition-duration: 0.3s;
+    transition-property: background-color;
+}
+
+.clickable:hover {
+    background-color: #b7b7b7;
+    cursor: pointer;
+    
+}
+
+.clickable:active {
+    background-color: #eee;
+}
+
+#printList {
+    text-align: right;
+    padding-top: 0px;
+}
+
+#printList tbody tr td {
+    color: #000;
+}
+
+#id_from_date_day {
+    width: 25%;
+    display: inline;
+}
+
+#id_from_date_month {
+    width: 45%;
+    display: inline;
+}
+
+#id_from_date_year {
+    width: 25%;
+    display: inline;
+}
+
+#id_due_date_day {
+    width: 25%;
+    display: inline;
+}
+
+#id_due_date_month {
+    width: 45%;
+    display: inline;
+}
+
+#id_due_date_year {
+    width: 25%;
+    display: inline;
+}
+
+
+#docsList th {
+    border: 1px solid #000;
+}
+
+#docsList td {
+    border: 1px solid #000;
+}
+
+
+#docsList {
+    display: none;
+    text-align: left;
+}
+
+#docsList tbody tr td {
+    text-align: left;   
+}
+
+.left-text {
+    text-align: left;
+}
+
+.docflow-common-col {
+    max-width: 100px;
+}
+
+.docflow-simple-col {
+    max-width: 100px;
+}
+
+@media print {
+    .filter-form {
+        display: none;
+    }
+
+    .do-not-print {
+        display: none;
+    }
+
+    .filter-table {
+        display: none;
+    }
+
+    table tbody tr td {
+        font-size: 8px;
+        width: 80px;
+    }
+    table tbody tr th:nth-child(2) {
+        width: 300px;
+    }
+
+    .table tbody tr td {
+        border: 1px solid #000;
+    }
+
+    .effectiveness-report-table {
+        font-family: 'Times New Roman';
+        font-size: 10;
+    }
+
+    .effectiveness-quality-report-table {
+        font-family: 'Times New Roman';
+        font-size: 10;
+    }
+
+    h1 {
+        font-size: 13;
+    }
+
+    .effectiveness-report-table .ver-text {
+        font-size: 8;
+    }
+
+    .effectiveness-quality-report-table .ver-text {
+        font-size: 8;
+    }
+
+    .filter-table {
+        display: none;
+    }
+  
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+{% load compress %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Филиалы "ЗАВОД ГОТОВЫХ ТЕПЛИЦ"</title>
+        {% block stylesheets %}
+        {% compress css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'contacts/css/bootstrap.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'contacts/css/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'contacts/css/index.css' %}" />
+        {% endcompress %}
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        <!-- <link rel="icon" href="{% static 'contacts/images/android-icon-192x192.png' %}" type="image/x-icon" /> -->
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+            <a class="navbar-brand" title="Администрирование филиалов">
+                <img width=30 style="display: inline;" class="brand-logo" alt="Логотип" src="{% static 'contacts/images/android-icon-192x192.png' %}"/>
+                Филиалы "ЗАВОД ГОТОВЫХ ТЕПЛИЦ"
+            </a>
+                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button> -->
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'contacts:auth_logout' %}" aria-disabled="true">Выйти из системы ({{ user.username }}) <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contacts:index' %}" aria-disabled="true">Войти в систему</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="/admin/" tabindex="-1" aria-disabled="true">Администрирование</a>
+                    </li>
+                </ul>
+                                
+            </div>
+          </nav>
+
+        
+        {% block form %}
+        {% endblock form %}
+        {% block content %} 
+        {% endblock %}
+
+        <footer class="footer">
+            <br/>
+            <br/>
+        </footer>
+
+        {% block javascripts %}
+        {% compress js %}
+        <script type="text/javascript" src="{% static 'contacts/js/jquery-3.5.1.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'contacts/js/bootstrap.js' %}"></script>
+        <script type="text/javascript" src="{% static 'contacts/js/jsapi.js' %}"></script>
+        <script type="text/javascript" src="{% static 'contacts/js/jquery.tablesorter.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'contacts/js/jquery.filtertable.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'contacts/js/common.js' %}"></script>
+        <script type="text/javascript" src="{% static 'contacts/js/ajax.js' %}"></script>
+        {% endcompress %}
+        {% endblock %}
+    </body>
+    
+</html>
