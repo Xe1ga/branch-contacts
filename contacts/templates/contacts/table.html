@@ -1,9 +1,11 @@
 {% extends "contacts/base.html" %}
+{% load static %}
+{% load compress %}
 {% block content %}
 <table class="table table-striped table-responsive">
     <thead>
         <tr>
-            <th scope="col">№ п/п</th>
+            <th scope="col">№</th>
             <th scope="col">Адрес филиала</th>
             <th scope="col">Часы работы</th>
             <th scope="col">Метро</th>
@@ -19,11 +21,97 @@
             <td>{{ branch.address }}</td>
             <td>{{ branch.working_hours }}</td>
             <td>{{ branch.metro }}</td>
-            <td>{{ branch.phone_number }}</td>
+            <td class="clickable get-data-modal action" data="{{ branch.phone_number }}" data-toggle="modal" data-target="#mainModal" data-coord="{{ branch.coordinates }}">{{ branch.phone_number }}</td>
             <td>{{ branch.holiday }}</td>
             <td>{{ branch.coordinates }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<!-- Modal -->
+
+
+<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="docsList">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mainModalLabel">Информация о филиале
+                    <a data-toggle="tooltip" data-placement="bottom" title="Распечатать перечень из браузера"><span class="btn glyphicon glyphicon-print" id="printList" alt="Распечатать перечень"></span></a>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <style>
+                    #docsList {
+                        border-right: 1px solid #000;
+                        border-top: 1px solid #000;
+                    }
+                    #docsList tbody tr td {
+                        border-left: 1px solid #000;
+                        border-bottom: 1px solid #000;
+                    }
+                    #docsList thead tr th {
+                        border-left: 1px solid #000;
+                        border-bottom: 1px solid #000;
+                    }
+                    .filter-table {
+                        display: none;
+                    }
+                </style>
+                <div style="display: none" class="row" id="preloader-modal">
+                    <div class="col-xs-offset-4 col-xs-4">
+                        <img class="img img-responsive" src="/static/contacts/images/preloader.gif" />
+                    </div>
+                </div>
+                <table id="docsList" class="table table-bordered tablesorter">
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe id="txtArea1" style="display:none"></iframe> -->
+
 {% endblock %}
+
+{% block javascripts %}  
+    {{ block.super }}
+    {% compress js %}
+    <script type="text/javascript" src="{% static 'contacts/js/table.js' %}"></script>
+
+    {% endcompress %}
+{% endblock %}
+
