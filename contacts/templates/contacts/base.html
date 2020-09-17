@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
-{% load compress %}
+{% load static compress %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <html>
@@ -11,25 +10,23 @@
         {% compress css %}
         <link rel="stylesheet" type="text/css" href="{% static 'contacts/css/bootstrap.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'contacts/css/style.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'contacts/css/index.css' %}" />
         {% endcompress %}
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-        <!-- <link rel="icon" href="{% static 'contacts/images/android-icon-192x192.png' %}" type="image/x-icon" /> -->
+        <link rel="icon" href="{% static 'contacts/images/favicon.png' %}" type="image/x-icon" />
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-            <a class="navbar-brand" title="Администрирование филиалов">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/" title="Администрирование филиалов">
                 <img width=30 style="display: inline;" class="brand-logo" alt="Логотип" src="{% static 'contacts/images/android-icon-192x192.png' %}"/>
                 Филиалы "ЗАВОД ГОТОВЫХ ТЕПЛИЦ"
             </a>
-                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button> -->
           
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                {% comment %}
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                {% endcomment %}
+                <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
                     {% if user.is_authenticated %}
                     <li class="nav-item active">
                     <a class="nav-link" href="{% url 'contacts:auth_logout' %}" aria-disabled="true">Выйти из системы ({{ user.username }}) <span class="sr-only">(current)</span></a>
@@ -41,9 +38,10 @@
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                    <a class="nav-link" href="/admin/" tabindex="-1" aria-disabled="true">Администрирование</a>
+                    <a class="nav-link" href="/admin/" aria-disabled="true">Администрирование</a>
                     </li>
                 </ul>
+                
                                 
             </div>
         </nav>

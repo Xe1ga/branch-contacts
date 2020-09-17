@@ -123,3 +123,14 @@
     padding: 10px 20px;
     }
    }
+
+    .mycontainer {
+    margin-top: 5%;
+    }
+    .myscalable {
+    padding-top: 5%;
+    }
+
+    .mybtn {
+    padding-bottom: 3%;
+    }

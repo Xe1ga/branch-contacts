@@ -1,7 +1,28 @@
 {% extends "contacts/base.html" %}
 {% load static %}
 {% load compress %}
+
+
+{% block stylesheets %}
+{{ block.super }}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{% static 'contacts/css/table.css' %}"/>
+{% endcompress %}
+{% endblock %}
+
 {% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class=".col-12 .col-sm-6 .offset-sm-3 .col-md-8 .offset-md-2 .col-lg-8 .offset-lg-2 .col-xs-8 .offset-xs-2">
+      <h3 class="mainheader">Таблица филиалов организации</h3>
+      <hr />
+    </div>
+  </div>
+</div>
+    
+
 <table class="table table-striped table-responsive">
     <thead>
         <tr>
