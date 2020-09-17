@@ -59,11 +59,32 @@ def auth_login(request):
 def auth_logout(request):
     logout(request)
     return render(request, 'contacts/index.html', locals())
-
+    
+# Получить таблицу филиалов
 @login_required(login_url='/')
 def get_branch_list(request):
     branchs = Branch.objects.all()
     # return render(request, 'contacts/table.html', locals())
     return render(request, 'contacts/table.html', locals())
 
+# Сохранение изменений в таблице филиалов по контретной записи
+@login_required(login_url='/')
+def save_changes(request):
+    print (request.POST)
+    if request.method == 'POST':
+        org = get_object_or_404(Branch, pk = request.POST.get('organizationid'))
+        org.address = request.POST.get('address')
+        org.working_hours = request.POST.get('workinghours')
+        org.metro = request.POST.get('metro')
+        org.phone_number = request.POST.get('phone')
+        if request.POST.get('holiday') == "Да":
+            org.holiday = True
+        else:
+            org.holiday = False
+        org.coordinates = request.POST.get('coordinates')
+        org.save()
+   
+    return HttpResponseRedirect("/contacts/")
+
+        
     

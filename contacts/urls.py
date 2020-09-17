@@ -5,6 +5,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^auth_login/$', views.auth_login, name='auth_login'),
     url(r'^auth_logout/$', views.auth_logout, name='auth_logout'),
-    url(r'^contacts/$', views.get_branch_list, name='get_branch_list')
+    url(r'^contacts/$', views.get_branch_list, name='get_branch_list'),
+    url(r'^contacts/save_changes/$', views.save_changes, name='save_changes')
 ]
 app_name = 'contacts'

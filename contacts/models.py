@@ -7,7 +7,7 @@ class Branch(models.Model):
     working_hours = models.CharField(max_length = 250, verbose_name = 'Время работы', blank = True)
     metro = models.CharField(max_length = 200, verbose_name = 'Метро', blank = True)
     phone_number = models.CharField(max_length = 250, verbose_name = 'Номер телефона', blank = True)
-    holiday = models.CharField(max_length = 250, verbose_name = 'Отпуск', blank = True)
+    holiday = models.BooleanField(verbose_name = 'Отпуск', default = False)
     coordinates = models.CharField(max_length = 250, verbose_name = 'Координаты', blank = True)
     
     def __str__(self):

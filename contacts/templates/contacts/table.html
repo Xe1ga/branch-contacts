@@ -13,15 +13,14 @@
 {% block content %}
 
 
-<div class="container">
-  <div class="row">
-    <div class=".col-12 .col-sm-6 .offset-sm-3 .col-md-8 .offset-md-2 .col-lg-8 .offset-lg-2 .col-xs-8 .offset-xs-2">
-      <h3 class="mainheader">Таблица филиалов организации</h3>
-      <hr />
-    </div>
-  </div>
+<div class="header-h1 header-h1-center">
+  <h1>Таблица филиалов организации</h1>
 </div>
-    
+
+<div class="form-group">
+  <button type="button" class="btn btn-success" data-dismiss="modal">Добавить новый филиал</button>
+  <button type="button" class="btn btn-danger">Удалить выбранный филиал</button> 
+</div>
 
 <table class="table table-striped table-responsive">
     <thead>
@@ -30,7 +29,7 @@
             <th scope="col">Адрес филиала</th>
             <th scope="col">Часы работы</th>
             <th scope="col">Метро</th>
-            <th scope="col">Номер телефона</th>
+            <th scope="col">Номера телефонов</th>
             <th scope="col">Отпуск</th>
             <th scope="col">Координаты</th>
         </tr>
@@ -42,8 +41,14 @@
             <td>{{ branch.address }}</td>
             <td>{{ branch.working_hours }}</td>
             <td>{{ branch.metro }}</td>
-            <td class="clickable get-data-modal action" data="{{ branch.phone_number }}" data-toggle="modal" data-target="#mainModal" data-coord="{{ branch.coordinates }}">{{ branch.phone_number }}</td>
-            <td>{{ branch.holiday }}</td>
+            <td class="clickable get-data-modal action" data="{{ branch.id }}" data-toggle="modal" data-target="#mainModal" data-address="{{ branch.address }}" data-workinghours= "{{ branch.working_hours }}" data-metro="{{ branch.metro }}" data-phone="{{ branch.phone_number }}" data-holiday="{{ branch.holiday }}" data-coord="{{ branch.coordinates }}">{{ branch.phone_number }}</td>
+            <td>
+              {% if branch.holiday %}
+                Да
+              {% else %}
+                Нет
+              {% endif %}
+            </td>
             <td>{{ branch.coordinates }}</td>
         </tr>
         {% endfor %}
@@ -53,78 +58,72 @@
 <!-- Modal -->
 
 
-<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title" id="myLargeModalLabel">New message</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="docsList">
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
+        <form id="info" action="{% url 'contacts:save_changes' %}" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-11">
+              <label for="address" class="col-form-label">Адрес</label>
+              <textarea type="text" class="form-control" name="address" id="address"></textarea>
+            </div>
           </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="metro" class="col-form-label">Метро</label>
+              <input type="text" class="form-control" name="metro" id="metro">
+            </div>
+            <div class="form-group col-md-5">
+              <label for="workinghours" class="col-form-label">Часы работы</label>
+              <textarea type="text" class="form-control" name="workinghours" id="workinghours"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="phone">Номера телефонов</label>
+              <input type="text" class="form-control" name="phone" id="phone">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="holiday">Отпуск</label>
+              <select name="holiday" id="holiday" class="form-control">
+                {% if branch.holiday %}
+                  <option selected>Да</option>
+                  <option>Нет</option>
+                {% else %}
+                  <option>Да</option>
+                  <option selected>Нет</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-11">
+              <label for="coordinates" class="col-form-label">Координаты</label>
+              <input type="text" class="form-control" name="coordinates" id="coordinates">
+            </div>
+          </div>
+          <input type="hidden" name="organizationid" id="organizationid">
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-warning">Показать на карте</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 
-<div class="modal fade" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="mainModalLabel">Информация о филиале
-                    <a data-toggle="tooltip" data-placement="bottom" title="Распечатать перечень из браузера"><span class="btn glyphicon glyphicon-print" id="printList" alt="Распечатать перечень"></span></a>
-                </h4>
-            </div>
-            <div class="modal-body">
-                <style>
-                    #docsList {
-                        border-right: 1px solid #000;
-                        border-top: 1px solid #000;
-                    }
-                    #docsList tbody tr td {
-                        border-left: 1px solid #000;
-                        border-bottom: 1px solid #000;
-                    }
-                    #docsList thead tr th {
-                        border-left: 1px solid #000;
-                        border-bottom: 1px solid #000;
-                    }
-                    .filter-table {
-                        display: none;
-                    }
-                </style>
-                <div style="display: none" class="row" id="preloader-modal">
-                    <div class="col-xs-offset-4 col-xs-4">
-                        <img class="img img-responsive" src="/static/contacts/images/preloader.gif" />
-                    </div>
-                </div>
-                <table id="docsList" class="table table-bordered tablesorter">
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-            </div>
-        </div>
-    </div>
-</div>
-<iframe id="txtArea1" style="display:none"></iframe> -->
 
 {% endblock %}
 
