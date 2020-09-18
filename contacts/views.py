@@ -70,7 +70,6 @@ def get_branch_list(request):
 # Сохранение изменений в таблице филиалов по контретной записи
 @login_required(login_url='/')
 def save_changes(request):
-    print (request.POST)
     if request.method == 'POST':
         org = get_object_or_404(Branch, pk = request.POST.get('organizationid'))
         org.address = request.POST.get('address')
@@ -85,6 +84,30 @@ def save_changes(request):
         org.save()
    
     return HttpResponseRedirect("/contacts/")
+
+# Удаление записи из таблицы
+@login_required(login_url='/')
+def delete_organization(request):
+    print(request.POST)
+    if request.method == 'POST':
+        org = get_object_or_404(Branch, pk = request.POST.get('org_id'))
+        org.delete()
+   
+    return HttpResponseRedirect("/contacts/")
+
+# Добавление записи в таблицу
+@login_required(login_url='/')
+def add_organization(request):
+    if request.method == 'POST':
+        if request.POST.get('addholiday') == "Да":
+            holiday = True
+        else:
+            holiday = False
+        org = Branch(address=request.POST.get('addaddress'), working_hours=request.POST.get('addworkinghours'), metro=request.POST.get('addmetro'), phone_number=request.POST.get('addphone'), holiday=holiday, coordinates=request.POST.get('addcoordinates'))
+        org.save()
+   
+    return HttpResponseRedirect("/contacts/")
+
 
         
     

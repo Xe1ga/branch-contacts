@@ -9,14 +9,14 @@ margin-top: 1%;
 
 .header-h1 {
     position: relative;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
   }
   .header-h1::after {
     content: "";
     position: absolute;
-    border-top: 2px solid #c62828;
-    border-bottom: 2px solid #c62828;
+    border-top: 2px solid #0c0909;
+    border-bottom: 2px solid #0c0909;
     height: .375rem;
     left: 0;
     top: 50%;
@@ -26,7 +26,7 @@ margin-top: 1%;
   }
   .header-h1 h1 {
     font-size: 1.5rem;
-    color: #c62828;
+    color: #0c0909;
     display: inline-block;
     background: #fff;
     margin-bottom: 0;
@@ -45,4 +45,7 @@ margin-top: 1%;
   .header-h1-right h1 {
     padding-left: 1rem;
     padding-right: 0;
+  }
+  .form-group {
+    margin: 5px;
   }

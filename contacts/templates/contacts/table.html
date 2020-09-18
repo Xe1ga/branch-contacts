@@ -18,8 +18,7 @@
 </div>
 
 <div class="form-group">
-  <button type="button" class="btn btn-success" data-dismiss="modal">Добавить новый филиал</button>
-  <button type="button" class="btn btn-danger">Удалить выбранный филиал</button> 
+  <button type="button" class="btn btn-success add-data-modal action" data="{{ branch.id }}" data-toggle="modal" data-target="#adddataModal" data-address="{{ branch.address }}" data-workinghours= "{{ branch.working_hours }}" data-metro="{{ branch.metro }}" data-phone="{{ branch.phone_number }}" data-holiday="{{ branch.holiday }}" data-coord="{{ branch.coordinates }}">Добавить новый филиал</button>
 </div>
 
 <table class="table table-striped table-responsive">
@@ -62,7 +61,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myLargeModalLabel">New message</h5>
+        <h5 class="modal-title" id="myLargeModalLabel">Данные филиала</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -107,23 +106,91 @@
           <div class="form-row">
             <div class="form-group col-md-11">
               <label for="coordinates" class="col-form-label">Координаты</label>
-              <input type="text" class="form-control" name="coordinates" id="coordinates">
+              <input type="text" class="form-control" name="coordinates" id="coordinates" aria-describedby="coordinatesHelpBlock">
+              <small id="coordinatesHelpBlock" class="form-text text-muted">
+                Координаты указаны в порядке [широта, долгота]. <a href="https://yandex.ru/map-constructor/location-tool/">Ресурс для определения координат.</a></small>
+              </small>
             </div>
           </div>
           <input type="hidden" name="organizationid" id="organizationid">
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="save">Сохранить</button>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-warning">Показать на карте</button>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-secondary" id="orgdelete">Удалить</button>
+            </div>    
+          </div>          
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-warning">Показать на карте</button>
       </div>
     </div>
   </div>
 </div>
 
+<div class="modal fade bd-example-modal-lg" id="adddataModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myLargeModalLabel">Данные филиала</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addinfo" action="{% url 'contacts:add_organization' %}" method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-11">
+              <label for="addaddress" class="col-form-label">Адрес</label>
+              <textarea type="text" class="form-control" name="addaddress" id="addaddress"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="addmetro" class="col-form-label">Метро</label>
+              <input type="text" class="form-control" name="addmetro" id="addmetro">
+            </div>
+            <div class="form-group col-md-5">
+              <label for="addworkinghours" class="col-form-label">Часы работы</label>
+              <textarea type="text" class="form-control" name="addworkinghours" id="addworkinghours"></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="addphone">Номера телефонов</label>
+              <input type="text" class="form-control" name="addphone" id="addphone">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="addholiday">Отпуск</label>
+              <select name="addholiday" id="addholiday" class="form-control">
+                  <option>Да</option>
+                  <option>Нет</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-11">
+              <label for="addcoordinates" class="col-form-label">Координаты</label>
+              <input type="text" class="form-control" name="addcoordinates" id="addcoordinates" aria-describedby="coordinatesHelpBlock">
+              <small id="coordinatesHelpBlock" class="form-text text-muted">
+                Координаты указаны в порядке [широта, долгота]. <a href="https://yandex.ru/map-constructor/location-tool/">Ресурс для определения координат.</a></small>
+              </small>
+            </div>
+          </div>
+          <input type="hidden" name="organizationid" id="organizationid">
+          <div class="modal-footer">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="save">Сохранить</button>
+            </div>
+          </div>          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 

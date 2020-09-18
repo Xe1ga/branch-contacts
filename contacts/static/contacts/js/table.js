@@ -1,6 +1,4 @@
 $('.get-data-modal').on('click', function(){
-    // $('.filter-form').hide("slow");
-    // clearModalTable();
     var org_id = $(this).attr('data');
     var address = $(this).attr('data-address');
     var workinghours = $(this).attr('data-workinghours');
@@ -14,7 +12,17 @@ $('.get-data-modal').on('click', function(){
     document.getElementById('phone').value = phone;
     document.getElementById('coordinates').value = coordinates;
     document.getElementById('organizationid').value = org_id;
-    
+});   
+$('#orgdelete').click(function(){
+    org_id = document.getElementById('organizationid').value;
+    $.ajax({
+            url: "/contacts/delete_organization/",
+            method: 'POST',
+            data: {
+                org_id : org_id  
+            }
+        });
+});
 
     
     
@@ -61,4 +69,4 @@ $('.get-data-modal').on('click', function(){
     //         });
     //     }
     // });
-});
+
