@@ -1,0 +1,31 @@
+{% extends "contacts/base.html" %}
+{% load static %}
+{% load compress %}
+
+
+{% block stylesheets %}
+{{ block.super }}
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_key }}&amp;lang=ru_RU&amp;coordorder=latlong" type="text/javascript"></script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="header-h1 header-h1-center">
+  <h1>Филиал на карте</h1>
+</div>
+
+<body>
+    <div id="map" style="width: 600px; height: 400px"></div>
+</body>
+
+{% endblock %}
+
+{% block javascripts %}  
+    {{ block.super }}
+    {% compress js %}
+    <script type="text/javascript" src="{% static 'contacts/js/map.js' %}"></script>
+
+    {% endcompress %}
+{% endblock %}

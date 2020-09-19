@@ -15,6 +15,7 @@ import os.path
 # import appy.pod.renderer
 
 from django import template
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required, permission_required
@@ -64,7 +65,7 @@ def auth_logout(request):
 @login_required(login_url='/')
 def get_branch_list(request):
     branchs = Branch.objects.all()
-    # return render(request, 'contacts/table.html', locals())
+    
     return render(request, 'contacts/table.html', locals())
 
 # Сохранение изменений в таблице филиалов по контретной записи
@@ -92,8 +93,11 @@ def delete_organization(request):
     if request.method == 'POST':
         org = get_object_or_404(Branch, pk = request.POST.get('org_id'))
         org.delete()
-   
-    return HttpResponseRedirect("/contacts/")
+    
+        branchs = Branch.objects.all()
+        return render(request, 'contacts/table.html', locals())
+    return render(request, 'contacts/table.html', locals())
+
 
 # Добавление записи в таблицу
 @login_required(login_url='/')
@@ -107,6 +111,39 @@ def add_organization(request):
         org.save()
    
     return HttpResponseRedirect("/contacts/")
+
+# Яндекс карта
+@login_required(login_url='/')
+def get_map(request):
+    # if request.method == 'POST':
+    #     if request.POST.get('addholiday') == "Да":
+    #         holiday = True
+    #     else:
+    #         holiday = False
+    #     org = Branch(address=request.POST.get('addaddress'), working_hours=request.POST.get('addworkinghours'), metro=request.POST.get('addmetro'), phone_number=request.POST.get('addphone'), holiday=holiday, coordinates=request.POST.get('addcoordinates'))
+    #     org.save()
+    context = {
+       "yandex_key": settings.YANDEX_KEY
+        
+    }
+    return render(request, 'contacts/map.html', context)
+
+    # Яндекс карта
+@login_required(login_url='/')
+def get_map_2(request):
+    # if request.method == 'POST':
+    #     if request.POST.get('addholiday') == "Да":
+    #         holiday = True
+    #     else:
+    #         holiday = False
+    #     org = Branch(address=request.POST.get('addaddress'), working_hours=request.POST.get('addworkinghours'), metro=request.POST.get('addmetro'), phone_number=request.POST.get('addphone'), holiday=holiday, coordinates=request.POST.get('addcoordinates'))
+    #     org.save()
+    context = {
+       "yandex_key": settings.YANDEX_KEY
+        
+    }
+    return render(request, 'contacts/icon_customImage.html', context)
+
 
 
         

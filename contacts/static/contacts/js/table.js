@@ -22,6 +22,7 @@ $('#orgdelete').click(function(){
                 org_id : org_id  
             }
         });
+    location.reload();
 });
 
     

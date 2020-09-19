@@ -118,10 +118,13 @@
               <button type="submit" class="btn btn-primary" id="save">Сохранить</button>
             </div>
             <div class="form-group">
+              <a class="btn btn-warning" href="/contacts/map/" role="button">Показать на карте</a>
+              {% comment %}
               <button type="button" class="btn btn-warning">Показать на карте</button>
+              {% endcomment %}
             </div>
             <div class="form-group">
-              <button type="button" class="btn btn-secondary" id="orgdelete">Удалить</button>
+              <button type="button" class="btn btn-secondary" id="orgdelete" data-dismiss="modal">Удалить</button>
             </div>    
           </div>          
         </form>
