@@ -16,11 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
-from contacts.views import my_custom_page_not_found_view
+
 
 urlpatterns = [
     url(r'^', include('contacts.urls', namespace="contacts")),
     path('admin/', admin.site.urls),
 ]
 
-handler404 = my_custom_page_not_found_view

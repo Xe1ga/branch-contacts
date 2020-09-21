@@ -68,11 +68,11 @@ def get_branch_list(request):
     
     return render(request, 'contacts/table.html', locals())
 
-def my_custom_page_not_found_view(request, exception):
-    context = RequestContext(request)
-    response = render_to_response('404.html', context)
-    response.status_code = 404
-    return response
+# def my_custom_page_not_found_view(request, exception):
+#     context = RequestContext(request)
+#     response = render_to_response('contacts/404.html', context)
+#     response.status_code = 404
+#     return response
 
 # Сохранение изменений в таблице филиалов по контретной записи
 @login_required(login_url='/')
