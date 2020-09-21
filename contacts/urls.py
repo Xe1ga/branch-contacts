@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^contacts/save_changes/$', views.save_changes, name='save_changes'),
     url(r'^contacts/delete_organization/$', views.delete_organization, name='delete_organization'),
     url(r'^contacts/add_organization/$', views.add_organization, name='add_organization'),
-    url(r'^contacts/map/$', views.get_map, name='get_map'),
-    url(r'^contacts/map2/$', views.get_map_2, name='get_map_2')
+    url(r'^contacts/map/$', views.get_map, name='get_map')
 ]
 app_name = 'contacts'

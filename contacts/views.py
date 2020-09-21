@@ -89,7 +89,7 @@ def save_changes(request):
 # Удаление записи из таблицы
 @login_required(login_url='/')
 def delete_organization(request):
-    print(request.POST)
+   
     if request.method == 'POST':
         org = get_object_or_404(Branch, pk = request.POST.get('org_id'))
         org.delete()
@@ -115,36 +115,41 @@ def add_organization(request):
 # Яндекс карта
 @login_required(login_url='/')
 def get_map(request):
-    # if request.method == 'POST':
-    #     if request.POST.get('addholiday') == "Да":
-    #         holiday = True
-    #     else:
-    #         holiday = False
-    #     org = Branch(address=request.POST.get('addaddress'), working_hours=request.POST.get('addworkinghours'), metro=request.POST.get('addmetro'), phone_number=request.POST.get('addphone'), holiday=holiday, coordinates=request.POST.get('addcoordinates'))
-    #     org.save()
-    context = {
-       "yandex_key": settings.YANDEX_KEY
+    if request.method == 'GET':
+        org = get_object_or_404(Branch, pk = request.GET.get('org_id'))
+        coordinates = org.coordinates
+        if coordinates:
+            mlat = coordinates[1 : coordinates.find(",")]
+            mlong = coordinates[coordinates.find(",") + 1 : len(coordinates) - 1]
+            context = {
+                "yandex_key": settings.YANDEX_KEY,
+                "mlat": mlat,
+                "mlong": mlong  
+            }
+            return render(request, 'contacts/map.html', context)
+        else:
+            return HttpResponseBadRequest("Отсутствуют или некорректно заданы координаты")           
+
+      
         
-    }
-    return render(request, 'contacts/map.html', context)
-
-    # Яндекс карта
-@login_required(login_url='/')
-def get_map_2(request):
-    # if request.method == 'POST':
-    #     if request.POST.get('addholiday') == "Да":
-    #         holiday = True
-    #     else:
-    #         holiday = False
-    #     org = Branch(address=request.POST.get('addaddress'), working_hours=request.POST.get('addworkinghours'), metro=request.POST.get('addmetro'), phone_number=request.POST.get('addphone'), holiday=holiday, coordinates=request.POST.get('addcoordinates'))
-    #     org.save()
-    context = {
-       "yandex_key": settings.YANDEX_KEY
-        
-    }
-    return render(request, 'contacts/icon_customImage.html', context)
-
-
-
-        
+        # context = {
+        # "yandex_key": settings.YANDEX_KEY,
+        # "coord": org.coordinates
+            
+        # }
+        return org.coordinates
     
+
+# @login_required(login_url='/')
+# def get_map_point(request):
+    
+#     if request.method == 'POST':
+#         org = get_object_or_404(Branch, pk = request.POST.get('org_id'))
+#         context = {
+#         "yandex_key": settings.YANDEX_KEY,
+#         "coord": org.coordinates
+            
+#         }
+#         return render(request, 'contacts/map.html', context)
+#     return HttpResponseRedirect("/contacts/")
+

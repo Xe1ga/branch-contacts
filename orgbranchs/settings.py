@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(yvop2*!onhsdx$wwd!z4f3fz!0#t+ub+=9tjzwm=glpiqupaz'
-YANDEX_KEY = '5c8cbf05-260a-483b-a8f4-8cb4268094f2'
+YANDEX_KEY = 'e5f29fb9-b1a4-4ad6-b5f0-a8af00bb1300'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 

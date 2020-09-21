@@ -1,13 +1,22 @@
-// Карта
 ymaps.ready(init);
-var map;
+var mlat = Number(document.getElementById('mlat').value);
+var mlong = Number(document.getElementById('mlong').value);
 
-function init(){
-    map = new ymaps.Map ("map", {
-        center: [55.89552760371417,37.697847584655754],
-        zoom: 13,
-        controls: ["zoomControl", "searchControl", "fullscreenControl"],
-        options: {
-            preciseZoom: false,
-        },
-    });
+function init() {
+    
+    var myMap = new ymaps.Map("map", {
+            center: [mlat,mlong],
+            zoom: 15
+        }, {
+            searchControlProvider: 'yandex#search'
+        })
+    myMap.geoObjects
+        .add(new ymaps.Placemark([mlat,mlong], {
+            balloonContent: 'Филиал',
+            iconCaption: 'Филиал'
+        }, {
+            preset: 'islands#dotIcon',
+            iconColor: '#735184'
+       
+        }));
+}

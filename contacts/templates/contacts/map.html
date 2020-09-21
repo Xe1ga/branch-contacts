@@ -7,6 +7,9 @@
 {{ block.super }}
 
 <script src="https://api-maps.yandex.ru/2.1/?apikey={{ yandex_key }}&amp;lang=ru_RU&amp;coordorder=latlong" type="text/javascript"></script>
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{% static 'contacts/css/table.css' %}"/>
+{% endcompress %}
 
 {% endblock %}
 
@@ -16,8 +19,18 @@
   <h1>Филиал на карте</h1>
 </div>
 
+<div class="form-group">
+  <a class="btn btn-primary" href="/contacts/" role="button">Вернуться к таблице</a>
+</div>
+<div style="display: none" class="row" id="preloader-modal">
+  <div class="col-xs-offset-4 col-xs-4">
+      <img class="img img-responsive" src="/static/contacts/images/preloader.gif">
+  </div>
+</div>
 <body>
-    <div id="map" style="width: 600px; height: 400px"></div>
+    <div id="map" style="width: 100%; height: 400px"></div>
+    <input type="hidden"  name="mlat" id="mlat" value="{{ mlat }}">
+    <input type="hidden"  name="mlong" id="mlong" value="{{ mlong }}">
 </body>
 
 {% endblock %}
